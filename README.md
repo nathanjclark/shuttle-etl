@@ -22,7 +22,7 @@ This repository demonstrates how to build and deploy an ETL (Extract, Transform,
 - **Data Processing**: Leverages Polars for efficient Parquet file processing
 - **Database Storage**: Stores results in PostgreSQL with automatic migrations
 - **Monitoring**: Health check and status endpoints for observability
-- **Infrastructure as Code**: All resources provisioned through Shuttle macros
+- **Infrastructure from Code**: All resources provisioned through Shuttle macros
 
 ## Prerequisites
 
@@ -124,7 +124,7 @@ async fn process_parquet_file(storage: &Operator, pool: &PgPool, file_path: &str
 
 ### Database Storage
 
-Results are stored in PostgreSQL with automatic schema management:
+Results are stored in PostgreSQL with the following schema:
 
 ```sql
 CREATE TABLE etl_results (
@@ -242,7 +242,7 @@ shuttle-etl/
 2. **Runtime errors**: Review logs with `shuttle logs`
 3. **Resource provisioning**: Ensure your Shuttle account has the necessary permissions
 
-## Next Steps
+## Possible Next Steps
 
 - Add monitoring and alerting with metrics collection
 - Implement more sophisticated scheduling with cron expressions
