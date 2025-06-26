@@ -1,7 +1,5 @@
 # How to Build an ETL Job with Rust, Polars and Shuttle
 
-_Reading time: ~10 minutes_
-
 Data processing doesn't have to be complex or resource-heavy. In this tutorial, you'll learn how to build a simple ETL (Extract, Transform, Load) job using Rust, Polars, and Shuttle that automatically processes parquet files from S3 and stores results in PostgreSQL - all with minimal infrastructure setup.
 
 ## Why Use Rust and Polars for ETL?
@@ -30,7 +28,7 @@ Our ETL job will follow this architecture:
 
 ### Prerequisites
 
-Before we dive into the implementation, you'll need to set up a few things. First, create a free [Shuttle account](https://console.shuttle.dev) if you haven't already. Shuttle's free tier is generous enough for development and many production workloads, making it perfect for getting started with Rust-based ETL jobs.
+Before we dive into the implementation, you'll need to set up a few things. First, create a free [Shuttle account](https://console.shuttle.dev) if you haven't already. Shuttle's community tier is generous enough for development, making it perfect for getting started with Rust-based ETL jobs.
 
 Next, install the [Shuttle CLI](https://docs.shuttle.dev/getting-started/installation) on your development machine. The CLI handles project initialization, local development, and deployment with simple commands that abstract away the complexity of cloud infrastructure management.
 
@@ -105,7 +103,7 @@ This schema defines a simple but effective structure for tracking our ETL job re
 
 ### Step 4: Configure Secrets
 
-Proper secrets management is crucial for any production application, especially when dealing with cloud resources like S3. Shuttle provides a secure way to handle secrets that keeps them out of your code repository while making them available to your application at runtime.
+Shuttle provides a secure way to handle secrets that keeps them out of your code repository while making them available to your application at runtime.
 
 Create a `Secrets.toml` file in your project root for your S3 credentials:
 
@@ -377,9 +375,7 @@ async fn etl_status(State(pool): State<PgPool>) -> Json<EtlStatus> {
 }
 ```
 
-Monitoring and observability are essential for any production ETL system. These endpoints provide real-time insight into your pipeline's health and performance. The health check endpoint offers a simple way for load balancers and monitoring systems to verify your service is running, while the status endpoint provides detailed operational metrics.
-
-The status endpoint demonstrates how to build useful dashboards by querying your own operational data. By tracking when jobs last ran and how many files have been processed, you can quickly identify issues and understand your pipeline's throughput patterns.
+Monitoring and observability are essential for any production ETL system. These endpoints provide real-time insight into your pipeline's health and performance. The health check endpoint offers a simple way for load balancers and monitoring systems to verify your service is running, while the status endpoint provides more detailed operational metrics.
 
 ## Deployment & Conclusion
 
@@ -399,9 +395,9 @@ Behind these simple commands, Shuttle handles an enormous amount of infrastructu
 
 ### Monitor Your ETL Job
 
-Once your ETL job is running in production, Shuttle provides several ways to monitor and troubleshoot your pipeline. The HTTP endpoints we created give you real-time status information that you can access from any browser or integrate with monitoring tools. Visit your deployed service's `/health` endpoint for a simple health check, or check `/status` for detailed operational metrics including when the job last ran and how many files have been processed.
+The HTTP endpoints we created give you real-time status information that you can access from any browser or integrate with monitoring tools. Visit your deployed service's `/health` endpoint for a simple health check, or check `/status` for detailed operational metrics including when the job last ran and how many files have been processed.
 
-For deeper troubleshooting, the `shuttle logs` command provides access to your application's complete log output, including the detailed processing information we added with `println!` statements throughout our code.
+For deeper troubleshooting, the `shuttle logs` command provides access to your application's complete log output, including the detailed processing information we added with `println!` statements throughout our code. These logs can also be accessed via the Shuttle web console.
 
 ### Next Steps & Customization
 
@@ -421,10 +417,6 @@ For more sophisticated scheduling requirements, consider replacing our simple ti
 
 Traditional ETL infrastructure deployment is notoriously complex, typically requiring expertise in container orchestration platforms like Kubernetes or Docker Swarm, manual database provisioning and migration management, secure secret distribution systems, load balancer configuration and SSL certificate management, and comprehensive monitoring and logging infrastructure setup.
 
-With Shuttle, all of this operational complexity disappears behind simple annotations in your code. You focus exclusively on your business logic while Shuttle handles the infrastructure concerns automatically. This represents true "Infrastructure as Code" where your application requirements directly drive infrastructure provisioning.
+With Shuttle, all of this operational complexity disappears behind simple annotations in your code. You focus exclusively on your business logic while Shuttle handles the infrastructure concerns automatically. This represents true "Infrastructure from Code" where your application requirements directly drive infrastructure provisioning.
 
-The result is a production-ready ETL job that delivers enterprise-grade performance and reliability while operating at a fraction of the cost and complexity of traditional cloud deployments.
-
----
-
-_Ready to build more complex data pipelines? Check out the [Shuttle documentation](https://docs.shuttle.dev) for more integrations and deployment options._
+The result is an ETL job that delivers great performance and reliability while operating at a fraction of the cost and complexity of traditional cloud deployments.
