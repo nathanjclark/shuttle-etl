@@ -19,10 +19,10 @@ This repository demonstrates how to build and deploy an ETL (Extract, Transform,
 
 - **Scheduled ETL Jobs**: Runs automatically every 24 hours (configurable)
 - **S3 Integration**: Uses OpenDAL to access S3-compatible storage
-- **Data Processing**: Leverages Polars for efficient Parquet file processing
-- **Database Storage**: Stores results in PostgreSQL with automatic migrations
-- **Monitoring**: Health check and status endpoints for observability
-- **Infrastructure from Code**: All resources provisioned through Shuttle macros
+- **Data Processing**: Leverages Polars for efficient file processing
+- **Database Storage**: Stores results in PostgreSQL
+- **Monitoring**: Health check and status endpoints
+- **Infrastructure from Code**: All resources provisioned through Shuttle
 
 ## Prerequisites
 
